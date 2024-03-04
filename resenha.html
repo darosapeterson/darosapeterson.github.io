@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resenha F.C - Escolha de times</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    input[type="text"] {
+        width: calc(50% - 5px);
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #times {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 48%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    @media screen and (max-width: 600px) {
+        input[type="text"] {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Resenha F.C - Escolha de times</h1>
+    <form id="teamForm">
+        <input type="text" name="jogador1" placeholder="Vinicius" value="Vinicius">
+        <input type="text" name="jogador2" placeholder="Yan" value="Yan">
+        <input type="text" name="jogador3" placeholder="Pepe" value="Pepe">
+        <input type="text" name="jogador4" placeholder="Chadinho" value="Chadinho">
+        <input type="text" name="jogador5" placeholder="Emanuel" value="Emanuel">
+        <input type="text" name="jogador6" placeholder="Rodrigo" value="Rodrigo">
+        <input type="text" name="jogador7" placeholder="Jogador 7" value="Jogador 7">
+        <input type="text" name="jogador8" placeholder="Jogador 8" value="Jogador 8">
+        <input type="text" name="jogador9" placeholder="Jogador 9" value="Jogador 9">
+        <input type="text" name="jogador10" placeholder="Jogador 10" value="Jogador 10">
+        <input type="text" name="jogador11" placeholder="Jogador 11" value="Jogador 11">
+        <input type="text" name="jogador12" placeholder="Jogador 12" value="Jogador 12">
+        <input type="text" name="jogador13" placeholder="Jogador 13" value="Jogador 13">
+        <input type="text" name="jogador14" placeholder="Jogador 14" value="Jogador 14">
+        <input type="text" name="jogador15" placeholder="Jogador 15" value="Jogador 15">
+        <input type="text" name="jogador16" placeholder="Jogador 16" value="Jogador 16">
+        <input type="text" name="jogador17" placeholder="Jogador 17" value="Jogador 17">
+        <input type="text" name="jogador18" placeholder="Jogador 18" value="Jogador 18">
+        <input type="text" name="jogador19" placeholder="Jogador 19" value="Jogador 19">
+        <input type="text" name="jogador20" placeholder="Jogador 20" value="Jogador 20">
+        <button type="button" id="gerarBtn">Gerar</button>
+    </form>
+    <div id="times">
+        <table id="time1">
+            <thead>
+                <tr>
+                    <th>Time 1</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <table id="time2">
+            <thead>
+                <tr>
+                    <th>Time 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('gerarBtn').addEventListener('click', function() {
+        var form = document.getElementById('teamForm');
+        var jogadores = [];
+        for (var i = 0; i < form.elements.length - 1; i++) {
+            jogadores.push(form.elements[i].value);
+        }
+        var equipe1 = [];
+        var equipe2 = [];
+        // Aleatorizando a seleção dos jogadores para cada time
+        for (var j = 0; j < jogadores.length; j += 2) {
+            var randomIndex = Math.random() < 0.5 ? j : j + 1;
+            equipe1.push(jogadores[randomIndex]);
+            equipe2.push(jogadores[randomIndex === j ? j + 1 : j]);
+        }
+        equipe1.sort(function(a, b) {
+            return a.localeCompare(b, undefined, {numeric: true});
+        }); // Ordena os jogadores do time 1 em ordem crescente
+        equipe2.sort(function(a, b) {
+            return a.localeCompare(b, undefined, {numeric: true});
+        }); // Ordena os jogadores do time 2 em ordem crescente
+
+        // Preenchendo a tabela do Time 1
+        var time1Table = document.getElementById('time1').getElementsByTagName('tbody')[0];
+        time1Table.innerHTML = '';
+        for (var k = 0; k < equipe1.length; k++) {
+            var row = time1Table.insertRow(k);
+            var cell = row.insertCell(0);
+            cell.innerHTML = equipe1[k];
+        }
+
+        // Preenchendo a tabela do Time 2
+        var time2Table = document.getElementById('time2').getElementsByTagName('tbody')[0];
+        time2Table.innerHTML = '';
+        for (var l = 0; l < equipe2.length; l++) {
+            var row = time2Table.insertRow(l);
+            var cell = row.insertCell(0);
+            cell.innerHTML = equipe2[l];
+        }
+    });
+</script>
+
+</body>
+</html>
