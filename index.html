@@ -107,7 +107,7 @@
         <table id="time1">
             <thead>
                 <tr>
-                    <th>Time 1</th>
+                    <th>Time Preto</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,7 +117,7 @@
         <table id="time2">
             <thead>
                 <tr>
-                    <th>Time 2</th>
+                    <th>Time Branco</th>
                 </tr>
             </thead>
             <tbody>
@@ -125,6 +125,8 @@
             </tbody>
         </table>
     </div>
+	<br/>
+	<button type="button" id="copiarBtn" style="display: none;">Copiar</button>
 </div>
 
 <script>
@@ -166,7 +168,48 @@
             var cell = row.insertCell(0);
             cell.innerHTML = equipe2[l];
         }
+// Mostrar o botão de cópia quando os times forem gerados
+        var copiarBtn = document.getElementById('copiarBtn');
+        copiarBtn.style.display = 'block';
+        copiarBtn.addEventListener('click', function() {
+            copiarTabelas();
+        });
     });
+
+function copiarTabelas() {
+    var time1Table = document.getElementById('time1');
+    var time2Table = document.getElementById('time2');
+    var container = document.createElement('div');
+    container.appendChild(time1Table.cloneNode(true));
+
+    // Adicionando uma quebra de linha entre o conteúdo do Time 1 e o conteúdo do Time 2
+    container.appendChild(document.createElement('br'));
+
+    container.appendChild(time2Table.cloneNode(true));
+    var range = document.createRange();
+    var selection = window.getSelection();
+    
+    // Limpar a seleção anterior
+    selection.removeAllRanges();
+
+    // Adicionar o container ao corpo do documento para que seja selecionável
+    document.body.appendChild(container);
+
+    // Selecionar e copiar o conteúdo do container
+    range.selectNodeContents(container);
+    selection.addRange(range);
+
+    // Executar o comando de cópia
+    document.execCommand('copy');
+
+    // Remover o container após a cópia
+    document.body.removeChild(container);
+
+    // Mostrar uma mensagem de sucesso
+    alert('Tabelas de times copiadas para a área de transferência!');
+}
+
+
 </script>
 
 </body>
